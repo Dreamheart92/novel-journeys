@@ -1,4 +1,5 @@
 import style from "./Header.module.css";
+import Search from "../search/Search.jsx";
 
 export default function Header() {
     return (
@@ -9,7 +10,7 @@ export default function Header() {
                 </div>
 
                 <div>
-                    <input type="text" placeholder="Search books..."/>
+                    <Search/>
                 </div>
 
                 <div>
