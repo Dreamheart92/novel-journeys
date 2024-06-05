@@ -9,7 +9,7 @@ export default function Header() {
                     <h1>Logo</h1>
                 </div>
 
-                <div>
+                <div className={style['search-container']}>
                     <Search/>
                 </div>
 
