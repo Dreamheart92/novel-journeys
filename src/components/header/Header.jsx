@@ -1,5 +1,6 @@
 import style from "./Header.module.css";
 import Search from "../search/Search.jsx";
+import AccountButton from "../account-button/AccountButton.jsx";
 
 export default function Header() {
     return (
@@ -14,7 +15,7 @@ export default function Header() {
                 </div>
 
                 <div>
-                    <button>Sign in</button>
+                    <AccountButton/>
                 </div>
 
             </div>
