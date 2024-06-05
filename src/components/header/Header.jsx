@@ -1,7 +1,9 @@
+import style from "./Header.module.css";
+
 export default function Header() {
     return (
-        <header>
-            <div>
+        <header className={style.header}>
+            <div className={style['header-primary']}>
                 <div>
                     <h1>Logo</h1>
                 </div>
@@ -16,8 +18,8 @@ export default function Header() {
 
             </div>
 
-            <div>
-                <ul>
+            <div className={style['header-secondary']}>
+                <ul className={style.items}>
                     <li>Menu item</li>
                     <li>Menu item 2</li>
                     <li>Menu item 3</li>
