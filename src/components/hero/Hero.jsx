@@ -1,6 +1,6 @@
 import style from "./Hero.module.css";
 
-import banner from "../../../public/Banner.jpg";
+import banner from "../../assets/Banner.jpg";
 
 export default function Hero() {
     return (
