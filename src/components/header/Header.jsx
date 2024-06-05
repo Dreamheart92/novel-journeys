@@ -4,14 +4,13 @@ import Menu from "../menu/Menu.jsx";
 
 import style from "./Header.module.css";
 import MenuItem from "../menu-item/MenuItem.jsx";
+import Logo from "../logo/Logo.jsx";
 
 export default function Header() {
     return (
         <header className={style.header}>
             <div className={style['header-primary']}>
-                <div>
-                    <h1>Logo</h1>
-                </div>
+                <Logo/>
 
                 <div className={style['search-container']}>
                     <Search/>
