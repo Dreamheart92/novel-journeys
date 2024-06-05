@@ -19,16 +19,6 @@
     justify-content: center;
 }
 
-.items {
-    margin-top: 1em;
-    display: flex;
-    gap: .25em;
-}
-
-.items li {
-    font-size: 1.25em;
-}
-
 .search-container {
     margin-top: .5em;
     width: 60%;

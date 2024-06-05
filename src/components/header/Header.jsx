@@ -1,6 +1,9 @@
-import style from "./Header.module.css";
 import Search from "../search/Search.jsx";
 import AccountButton from "../account-button/AccountButton.jsx";
+import Menu from "../menu/Menu.jsx";
+
+import style from "./Header.module.css";
+import MenuItem from "../menu-item/MenuItem.jsx";
 
 export default function Header() {
     return (
@@ -21,13 +24,27 @@ export default function Header() {
             </div>
 
             <div className={style['header-secondary']}>
-                <ul className={style.items}>
-                    <li>Menu item</li>
-                    <li>Menu item 2</li>
-                    <li>Menu item 3</li>
-                    <li>Menu item 4</li>
-                    <li>Menu item 5</li>
-                </ul>
+                <Menu>
+                    <MenuItem>
+                        Menu item
+                    </MenuItem>
+
+                    <MenuItem>
+                        Menu item
+                    </MenuItem>
+
+                    <MenuItem>
+                        Menu item
+                    </MenuItem>
+
+                    <MenuItem>
+                        Menu item
+                    </MenuItem>
+
+                    <MenuItem>
+                        Menu item
+                    </MenuItem>
+                </Menu>
             </div>
         </header>
     )
