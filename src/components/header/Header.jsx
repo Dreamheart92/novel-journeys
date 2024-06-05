@@ -1,6 +1,6 @@
 export default function Header() {
     return (
-        <section>
+        <header>
             <div>
                 <div>
                     <h1>Logo</h1>
@@ -25,6 +25,6 @@ export default function Header() {
                     <li>Menu item 5</li>
                 </ul>
             </div>
-        </section>
+        </header>
     )
 }
