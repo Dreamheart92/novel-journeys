@@ -28,3 +28,9 @@
 .items li {
     font-size: 1.25em;
 }
+
+.search-container {
+    margin-top: .5em;
+    width: 60%;
+    height: 2.4em;
+}
