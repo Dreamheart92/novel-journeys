@@ -25,23 +25,23 @@ export default function Header() {
             <div className={style['header-secondary']}>
                 <Menu>
                     <MenuItem>
-                        Menu item
+                        New
                     </MenuItem>
 
                     <MenuItem>
-                        Menu item
+                        Most Rated
                     </MenuItem>
 
                     <MenuItem>
-                        Menu item
+                        Fiction
                     </MenuItem>
 
                     <MenuItem>
-                        Menu item
+                        Non-Fiction
                     </MenuItem>
 
                     <MenuItem>
-                        Menu item
+                        Shop all
                     </MenuItem>
                 </Menu>
             </div>
