@@ -43,15 +43,18 @@ const checkForFieldErrors = (fieldName, fieldValue, validation, setFieldErrors) 
 }
 
 export const useForm = (initialValue = {}) => {
-    const [formData, setFormData] = useState(initialValue);
+    const [formState, setFormState] = useState(initialValue);
+    const [formData, setFormData] = useState(null);
+
     const [fieldErrors, setFieldErrors] = useState(null);
+    const [isSubmittedAndHasErrors, setIsSubmittedAndHasErrors] = useState(false);
 
     const register = (fieldName, fieldValue = "", validation = {}) => {
 
         //Check if fieldName exist if would cause infinitive loop
 
-        if (!formData.hasOwnProperty(fieldName)) {
-            setFormData(prevFormState => ({
+        if (!formState.hasOwnProperty(fieldName)) {
+            setFormState(prevFormState => ({
                 ...prevFormState,
                 [fieldName]: {value: fieldValue, isDirty: false}
             }))
@@ -64,29 +67,48 @@ export const useForm = (initialValue = {}) => {
         return {
             handlers: {
                 onChange: (event) => {
-                    setFormData(prevState => ({
+                    setFormState(prevState => ({
                         ...prevState,
                         [fieldName]: {...prevState[fieldName], value: event.target.value}
                     }))
                     checkForFieldErrors(fieldName, event.target.value, validation, setFieldErrors);
                 },
                 onBlur: (event) => {
-                    setFormData(prevState => ({
+                    setFormState(prevState => ({
                         ...prevState,
                         [fieldName]: {...prevState[fieldName], isDirty: true}
                     }))
                 }
             },
             state: {
-                value: formData[fieldName]?.value,
-                isDirty: formData[fieldName]?.isDirty,
+                value: formState[fieldName]?.value,
+                isDirty: formState[fieldName]?.isDirty,
                 error: fieldErrors !== null ? fieldErrors[fieldName] || null : null
+            },
+            formState: {
+                isSubmittedAndHasErrors
+            }
+        }
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if (fieldErrors !== null) {
+            const isValidForm = Object.values(fieldErrors).every(requirement => requirement === null);
+
+            if (isValidForm) {
+                setFormData(formState);
+            } else {
+                setIsSubmittedAndHasErrors(true);
             }
         }
     }
 
     return {
-        formData,
-        register
+        formState,
+        register,
+        handleSubmit,
+        formData
     }
 }
