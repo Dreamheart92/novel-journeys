@@ -10,9 +10,14 @@ export const useHttp = ({url, settings, defaultValue}) => {
         fetch(url, settings)
             .then((response) => response.json())
             .then((data) => {
+                if (!data.success) {
+                    throw new Error(data);
+                }
                 setData(data);
             })
-            .catch((error) => console.log(error))
+            .catch((error) => {
+                setError({message: data.message, data: data.data})
+            })
             .finally(() => {
                 setIsLoading(false);
             })
