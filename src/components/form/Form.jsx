@@ -1,5 +1,7 @@
-export default function Form({children}) {
+export default function Form({formData, children}) {
     return (
-        {children}
+        <>
+            {children}
+        </>
     )
 }
