@@ -16,7 +16,6 @@ const validateField = (value, validations, fieldName) => {
             }
             case "minLength" : {
                 if (value.trim().length < requirement) {
-                    console.log("min length")
                     errors[validationType] = `${normalizeName(fieldName)} must be at least ${requirement} characters long`
                 }
                 break;
@@ -54,7 +53,7 @@ export const useForm = (initialValue = {}) => {
         if (!formData.hasOwnProperty(fieldName)) {
             setFormData(prevFormState => ({
                 ...prevFormState,
-                [fieldName]: fieldValue
+                [fieldName]: {value: fieldValue, isDirty: false}
             }))
 
             if (Object.keys(validation).length > 0) {
@@ -67,13 +66,20 @@ export const useForm = (initialValue = {}) => {
                 onChange: (event) => {
                     setFormData(prevState => ({
                         ...prevState,
-                        [fieldName]: event.target.value
+                        [fieldName]: {...prevState[fieldName], value: event.target.value}
                     }))
                     checkForFieldErrors(fieldName, event.target.value, validation, setFieldErrors);
+                },
+                onBlur: (event) => {
+                    setFormData(prevState => ({
+                        ...prevState,
+                        [fieldName]: {...prevState[fieldName], isDirty: true}
+                    }))
                 }
             },
             state: {
-                value: formData[fieldName],
+                value: formData[fieldName]?.value,
+                isDirty: formData[fieldName]?.isDirty,
                 error: fieldErrors !== null ? fieldErrors[fieldName] || null : null
             }
         }
