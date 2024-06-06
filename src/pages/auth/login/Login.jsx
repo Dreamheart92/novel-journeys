@@ -7,11 +7,11 @@ export default function Login() {
 
     return (
         <div>
-            <Form formData={formData} onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <Input label="username" {...register("username", "", {required: true, minLength: 6})}/>
                 <Input label="password" type="password" {...register("password", "", {required: true, minLength: 6})}/>
                 <button type="submit">Login</button>
-            </Form>
+            </form>
         </div>
     )
 }
