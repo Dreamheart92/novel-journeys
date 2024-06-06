@@ -22,6 +22,8 @@ export default function Home() {
         <section className={style.container}>
             <Hero/>
             {recentlyAddedBooks}
+            {recentlyAddedBooks}
+            {recentlyAddedBooks}
         </section>
     )
 }
