@@ -12,7 +12,7 @@ export default function BookList({caption, books, error}) {
                 <>
                     <h3>{caption}</h3>
                     <section className={style['books-list']}>
-                        {books.data.products.slice(0, 7).map(book =>
+                        {books.products.slice(0, 7).map(book =>
                             <BookCard key={book._id} book={book}/>
                         )}
                     </section>
