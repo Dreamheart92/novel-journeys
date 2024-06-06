@@ -1,8 +1,10 @@
-export default function Input() {
+export default function Input({...props}) {
+    console.log(props)
+
     return (
         <>
             <label htmlFor=""></label>
-            <input type="text" name="name"/>
+            <input {...props} type="text" name="name"/>
         </>
     )
 }
