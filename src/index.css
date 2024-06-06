@@ -77,6 +77,10 @@ img {
     object-fit: cover;
 }
 
+.error {
+    color: red;
+}
+
 @media screen and (max-width: 640px) {
     html {
         font-size: 10px;
