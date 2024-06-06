@@ -4,7 +4,7 @@ export default function Input({label, type = "text", ...props}) {
     const value = props.state.value;
     const error = props.state.error;
 
-    const showError = error && props.state.isDirty;
+    const showError = (error && props.state.isDirty) || (error && props.formState.isSubmittedAndHasErrors);
 
     return (
         <div className={style.container}>
