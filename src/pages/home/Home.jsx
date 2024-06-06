@@ -15,8 +15,8 @@ export default function Home() {
     } = useHttp({url: getRecentBooks, defaultValue: []});
 
     const recentlyAddedBooks = isRecentlyAddedBooksLoading === false ?
-        <BookList caption={"Recently added"} books={recentlyAddedBooksData}/> : <Spinner style={{marginTop: "2em"}}/>
-
+        <BookList caption={"Recently added"} books={recentlyAddedBooksData} error={recentlyAddedBooksError}/> :
+        <Spinner style={{marginTop: "2em"}}/>
 
     return (
         <section className={style.container}>
