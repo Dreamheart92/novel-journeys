@@ -8,7 +8,8 @@ export default function Login() {
     return (
         <div>
             <Form>
-                <Input {...register("username")}/>
+                <Input label="username" {...register("username", "", {required: true, minLength: 6})}/>
+                <Input label="password" type="password" {...register("password", "", {required: true, minLength: 6})}/>
             </Form>
         </div>
     )
