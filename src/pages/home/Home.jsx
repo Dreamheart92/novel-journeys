@@ -5,17 +5,23 @@ import {useHttp} from "../../hooks/useHttp.js";
 
 import {getRecentBooks} from "../../api/books.js";
 import BookList from "../../components/book-list/BookList.jsx";
+import Spinner from "../../components/spinner/Spinner.jsx";
 
 export default function Home() {
-    const {data: recentlyAddedBooks, isLoading, error} = useHttp({url: getRecentBooks, defaultValue: []});
+    const {
+        data: recentlyAddedBooksData,
+        isLoading: isRecentlyAddedBooksLoading,
+        error: recentlyAddedBooksError
+    } = useHttp({url: getRecentBooks, defaultValue: []});
+
+    const recentlyAddedBooks = isRecentlyAddedBooksLoading === false ?
+        <BookList caption={"Recently added"} books={recentlyAddedBooksData}/> : <Spinner style={{marginTop: "2em"}}/>
+
 
     return (
         <section className={style.container}>
             <Hero/>
-
-            {isLoading === false &&
-                <BookList caption={"Recently added"} books={recentlyAddedBooks}/>
-            }
+            {recentlyAddedBooks}
         </section>
     )
 }
