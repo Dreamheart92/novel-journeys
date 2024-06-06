@@ -1,27 +1,35 @@
 import {useEffect, useState} from "react";
 
+const sendHttpRequest = async (url, settings, setData, setError, setIsLoading) => {
+    setIsLoading(true);
+    const response = await fetch(url, settings);
+    const result = await response.json();
+
+    if (!result.success) {
+        setError({message: result.message, data: result.data});
+        setIsLoading(false);
+        return;
+    }
+
+    setData(result.data);
+    setIsLoading(false);
+}
+
 export const useHttp = ({url, settings, defaultValue}) => {
     const [data, setData] = useState(defaultValue);
     const [isLoading, setIsLoading] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(url, settings)
-            .then((response) => response.json())
-            .then((data) => {
-                if (!data.success) {
-                    throw new Error(data);
-                }
-                setData(data);
-            })
-            .catch((error) => {
-                setError({message: data.message, data: data.data})
-            })
-            .finally(() => {
-                setIsLoading(false);
-            })
+        if (!settings || settings.method === "GET") {
+            setIsLoading(true);
+            sendHttpRequest(url, settings, setData, setError, setIsLoading);
+        }
     }, [url]);
+
+    const sendRequest = (url, settings) => {
+        sendHttpRequest(url, settings, setData, setError, setIsLoading);
+    }
 
     return {
         data,
