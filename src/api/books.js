@@ -1,3 +1,3 @@
 import {API_ENDPOINTS} from "../constants/api.endpoints.js";
 
-export const getRecentBooks = API_ENDPOINTS.baseUrl + API_ENDPOINTS.getBooks + "?sortBy=newest";
+export const getRecentBooks = API_ENDPOINTS.books.getBooks + "?sortBy=newest";
