@@ -14,7 +14,7 @@ export default function Home() {
             <Hero/>
 
             {isLoading === false &&
-                <BookList books={recentlyAddedBooks}/>
+                <BookList caption={"Recently added"} books={recentlyAddedBooks}/>
             }
         </section>
     )
