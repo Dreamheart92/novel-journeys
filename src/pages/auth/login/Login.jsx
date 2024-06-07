@@ -8,6 +8,7 @@ import {login} from "../../../api/auth.js";
 
 import Input from "../../../components/shared/input/Input.jsx";
 import Button from "../../../components/shared/button/Button.jsx";
+import {storeUserDataToLocalStorage} from "../../../utility/storage.js";
 
 export default function Login({formStyle}) {
     const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function Login({formStyle}) {
 
     useEffect(() => {
         if (userData) {
+            storeUserDataToLocalStorage(userData);
             setTimeout(() => {
                 navigate("/");
             }, 2000)
