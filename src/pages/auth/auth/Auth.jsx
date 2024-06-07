@@ -23,7 +23,7 @@ export default function Auth() {
 
             <div className={style['auth-container']}>
                 {isOnLoginPage && <Login formStyle={style.form}/>}
-                {!isOnLoginPage && <Signup/>}
+                {!isOnLoginPage && <Signup formStyle={style.form}/>}
             </div>
         </section>
     )
