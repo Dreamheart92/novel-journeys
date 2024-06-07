@@ -2,26 +2,31 @@ import {useEffect, useState} from "react";
 
 const sendHttpRequest = async (url, settings, setData, setError, setIsLoading) => {
     setIsLoading(true);
-    const response = await fetch(url, settings);
-    const result = await response.json();
 
-    if (!result.success) {
-        setError({message: result.message, data: result.data});
+    try {
+
+        const response = await fetch(url, settings);
+        const result = await response.json();
+
+        if (!result.success) {
+            setError({message: result.message, data: result.data});
+        } else {
+            setData(result.data);
+        }
         setIsLoading(false);
-        return;
+    } catch (error) {
+        //TODO : redirect to 500 page something went wrong
     }
-
-    setData(result.data);
-    setIsLoading(false);
 }
 
-export const useHttp = ({url, settings, defaultValue}) => {
+export const useHttp = ({url, settings, defaultValue, initiate = true}) => {
     const [data, setData] = useState(defaultValue);
     const [isLoading, setIsLoading] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!settings || settings.method === "GET") {
+        const method = settings?.method || "GET";
+        if (initiate && method === "GET") {
             setIsLoading(true);
             sendHttpRequest(url, settings, setData, setError, setIsLoading);
         }
@@ -34,6 +39,7 @@ export const useHttp = ({url, settings, defaultValue}) => {
     return {
         data,
         isLoading,
-        error
+        error,
+        sendRequest
     }
 }
