@@ -3,3 +3,14 @@
     flex-direction: column;
     gap: .25em;
 }
+
+.text-field {
+    padding: .3em .5em;
+    outline: none;
+    border: 1px solid #bdc3c7;
+    border-radius: .25em;
+}
+
+.text-field:focus {
+    border-color: black;
+}

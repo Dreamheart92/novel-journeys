@@ -9,7 +9,7 @@ export default function Input({label, type = "text", ...props}) {
     return (
         <div className={style.container}>
             <label htmlFor={label}>{label[0].toUpperCase() + label.slice(1)}</label>
-            <input {...props.handlers} type={type} name={label} value={value}/>
+            <input className={style['text-field']} {...props.handlers} type={type} name={label} value={value}/>
 
             {showError &&
                 <p className="error">{Object.entries(error)[0][1]}</p>
