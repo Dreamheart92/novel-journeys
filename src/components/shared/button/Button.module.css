@@ -9,6 +9,15 @@
     font-size: .95em;
 }
 
+.btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    background-color: gray;
+}
+
 .primary {
     background-color: #2ecc71;
 }
