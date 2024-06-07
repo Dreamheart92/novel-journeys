@@ -11,25 +11,44 @@ import Button from "../../../components/shared/button/Button.jsx";
 
 export default function Login({formStyle}) {
     const navigate = useNavigate();
-    const {data, error, isLoading, sendRequest} = useHttp({initiate: false});
-    const {formData, register, handleSubmit} = useForm();
+    const {data: userData, error, isLoading, sendRequest} = useHttp({initiate: false});
+    const {formData: loginData, register, handleSubmit, clearFieldValue} = useForm();
+
+    const buttonCaption = userData ? "Successful login. Redirecting..." : "Login";
 
     useEffect(() => {
-        if (formData) {
-            sendRequest(login.url, login.settings(formData));
+        if (loginData) {
+            sendRequest(login.url, login.settings(loginData));
         }
-    }, [formData]);
+    }, [loginData]);
 
     const handleRedirect = () => {
         navigate("/signup");
     }
 
+    useEffect(() => {
+        if (userData) {
+            setTimeout(() => {
+                navigate("/");
+            }, 2000)
+        } else if (error) {
+            clearFieldValue("password");
+        }
+    }, [userData, error]);
+
+
     return (
         <>
+            {error && <p className="error">{error.message}</p>}
+
             <form onSubmit={handleSubmit} className={formStyle}>
-                <Input label="email" {...register("email", "", {required: true, minLength: 6})}/>
-                <Input label="password" type="password" {...register("password", "", {required: true, minLength: 6})}/>
-                <Button type="submit" caption={"Login"}>Login</Button>
+                <Input label="email" {...register("email", "", {required: true, minLength: 6, email: true})}>
+                    Email
+                </Input>
+                <Input label="password" type="password" {...register("password", "", {required: true, minLength: 6})}>
+                    Password
+                </Input>
+                <Button disabled={isLoading} type="submit">{buttonCaption}</Button>
             </form>
 
             <Button onClick={handleRedirect} className={"outline"}>
