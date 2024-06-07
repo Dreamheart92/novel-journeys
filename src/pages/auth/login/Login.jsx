@@ -1,11 +1,16 @@
-import Form from "../../../components/form/Form.jsx";
-import {useForm} from "../../../hooks/useForm.js";
-import Input from "../../../components/shared/input/Input.jsx";
-import {useHttp} from "../../../hooks/useHttp.js";
-import {login} from "../../../api/auth.js";
 import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+
+import {useHttp} from "../../../hooks/useHttp.js";
+import {useForm} from "../../../hooks/useForm.js";
+
+import {login} from "../../../api/auth.js";
+
+import Input from "../../../components/shared/input/Input.jsx";
+import Button from "../../../components/shared/button/Button.jsx";
 
 export default function Login({formStyle}) {
+    const navigate = useNavigate();
     const {data, error, isLoading, sendRequest} = useHttp({initiate: false});
     const {formData, register, handleSubmit} = useForm();
 
@@ -15,11 +20,21 @@ export default function Login({formStyle}) {
         }
     }, [formData]);
 
+    const handleRedirect = () => {
+        navigate("/signup");
+    }
+
     return (
-        <form onSubmit={handleSubmit} className={formStyle}>
-            <Input label="email" {...register("email", "", {required: true, minLength: 6})}/>
-            <Input label="password" type="password" {...register("password", "", {required: true, minLength: 6})}/>
-            <button type="submit">Login</button>
-        </form>
+        <>
+            <form onSubmit={handleSubmit} className={formStyle}>
+                <Input label="email" {...register("email", "", {required: true, minLength: 6})}/>
+                <Input label="password" type="password" {...register("password", "", {required: true, minLength: 6})}/>
+                <Button type="submit" caption={"Login"}>Login</Button>
+            </form>
+
+            <Button onClick={handleRedirect} className={"outline"}>
+                Create account
+            </Button>
+        </>
     )
 }
