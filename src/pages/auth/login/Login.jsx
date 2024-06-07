@@ -5,12 +5,9 @@ import {useHttp} from "../../../hooks/useHttp.js";
 import {login} from "../../../api/auth.js";
 import {useEffect} from "react";
 
-export default function Login() {
+export default function Login({formStyle}) {
     const {data, error, isLoading, sendRequest} = useHttp({initiate: false});
     const {formData, register, handleSubmit} = useForm();
-
-    console.log(data);
-    console.log(error);
 
     useEffect(() => {
         if (formData) {
@@ -19,12 +16,10 @@ export default function Login() {
     }, [formData]);
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <Input label="email" {...register("email", "", {required: true, minLength: 6})}/>
-                <Input label="password" type="password" {...register("password", "", {required: true, minLength: 6})}/>
-                <button type="submit">Login</button>
-            </form>
-        </div>
+        <form onSubmit={handleSubmit} className={formStyle}>
+            <Input label="email" {...register("email", "", {required: true, minLength: 6})}/>
+            <Input label="password" type="password" {...register("password", "", {required: true, minLength: 6})}/>
+            <button type="submit">Login</button>
+        </form>
     )
 }
