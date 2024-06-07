@@ -15,16 +15,18 @@ export default function Auth() {
         : "Join Novel Journeys Today – Your Next Adventure Awaits!"
 
     return (
-        <section className={style.container}>
-            <div className={style.heading}>
-                <h2>{heading}</h2>
-                <p>{caption}</p>
-            </div>
+        <section className={style.wrapper}>
+            <section className={style.container}>
+                <div className={style.heading}>
+                    <h2>{heading}</h2>
+                    <p>{caption}</p>
+                </div>
 
-            <div className={style['auth-container']}>
-                {isOnLoginPage && <Login formStyle={style.form}/>}
-                {!isOnLoginPage && <Signup formStyle={style.form}/>}
-            </div>
+                <div className={style['auth-container']}>
+                    {isOnLoginPage && <Login formStyle={style.form}/>}
+                    {!isOnLoginPage && <Signup formStyle={style.form}/>}
+                </div>
+            </section>
         </section>
     )
 }
