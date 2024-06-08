@@ -1,0 +1,20 @@
+.star {
+    position: relative;
+    width: 1.2em;
+    height: 2em;
+}
+
+.star-icon {
+    color: #d3d3d3;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.star-overlay {
+    position: absolute;
+    color: #f1c40f;
+    top: 0;
+    left: 0;
+    clip-path: inset(0 0% 0 0);
+}
