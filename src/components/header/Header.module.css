@@ -15,9 +15,16 @@
 }
 
 .header-secondary {
+    width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 2em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 1rem 1rem -0.875rem rgba(0, 0, 0, 0.05);
+}
+
+.header-secondary p {
+    font-size: .80em;
 }
 
 .search-container {
