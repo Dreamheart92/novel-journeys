@@ -43,3 +43,11 @@
 .outline:hover {
     background-color: #EEE;
 }
+
+.tag {
+    background-color: #eabb1b;
+}
+
+.tag:hover {
+    background-color: #cfa911;
+}
