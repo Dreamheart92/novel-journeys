@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import Home from "./pages/home/Home.jsx";
 import Auth from "./pages/auth/auth/Auth.jsx";
 import {PATHS} from "./constants/paths.js";
+import BookDetails from "./pages/details/BookDetails.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
             {
                 path: PATHS.signup,
                 element: <Auth/>
+            },
+            {
+                path: PATHS.book + "/:id",
+                element: <BookDetails/>
             }
         ]
     }
