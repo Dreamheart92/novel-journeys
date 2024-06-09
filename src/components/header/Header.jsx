@@ -5,7 +5,6 @@ import Menu from "../menu/Menu.jsx";
 import style from "./Header.module.css";
 import MenuItem from "../menu-item/MenuItem.jsx";
 import Logo from "../logo/Logo.jsx";
-import {removeUserDataFromLocalStorage} from "../../utility/storage.js";
 import {useSelector} from "react-redux";
 
 export default function Header() {
