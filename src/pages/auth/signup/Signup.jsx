@@ -6,6 +6,7 @@ import Button from "../../../components/shared/button/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import {passwordsMatching} from "../../../utility/utility.js";
 import {signup} from "../../../api/auth.js";
+import {storeUserDataToLocalStorage} from "../../../utility/storage.js";
 
 export default function Signup({formStyle}) {
     const navigate = useNavigate();
@@ -34,6 +35,7 @@ export default function Signup({formStyle}) {
 
     useEffect(() => {
         if (userData) {
+            storeUserDataToLocalStorage(userData);
             setTimeout(() => {
                 navigate("/");
             }, 2000)
