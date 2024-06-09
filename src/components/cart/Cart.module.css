@@ -1,0 +1,27 @@
+.backdrop {
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: all 0.3s ease-in;
+}
+
+.cart {
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    transition: all 0.3s ease-in;
+}
+
+.open {
+    width: 30em;
+}
+
+.container-open {
+    width: 100%;
+}
