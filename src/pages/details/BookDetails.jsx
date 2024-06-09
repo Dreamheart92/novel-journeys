@@ -6,10 +6,18 @@ import style from "./BookDetails.module.css";
 import Button from "../../components/shared/button/Button.jsx";
 import Rating from "../../components/rating/Rating.jsx";
 import {convertDate} from "../../utility/convertDate.js";
+import {useDispatch} from "react-redux";
+import {cartActions} from "../../store/cart.slice.js";
 
 export default function BookDetails() {
+    const dispatch = useDispatch();
     const {id: bookId} = useParams();
     const {data: bookData, isLoading, error} = useHttp({url: getBookById(bookId)});
+
+    const handleAddItemToCart = (book) => {
+        dispatch(cartActions.addItemToCart({book}));
+        dispatch(cartActions.openCart());
+    }
 
     return (
         <section className={style.container}>
@@ -72,7 +80,8 @@ export default function BookDetails() {
 
                 <div className={style.controllers}>
                     <div style={{width: "10em"}}>
-                        <Button>
+                        <Button
+                            onClick={() => handleAddItemToCart(bookData)}>
                             Add to cart
                         </Button>
                     </div>
