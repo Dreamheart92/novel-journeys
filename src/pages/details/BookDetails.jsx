@@ -5,8 +5,6 @@ import {getBookById} from "../../api/books.js";
 import style from "./BookDetails.module.css";
 import Button from "../../components/shared/button/Button.jsx";
 import Rating from "../../components/rating/Rating.jsx";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHeart} from "@fortawesome/free-solid-svg-icons";
 import {convertDate} from "../../utility/convertDate.js";
 
 export default function BookDetails() {
