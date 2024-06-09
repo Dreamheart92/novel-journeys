@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {userActions} from "./store/user.slice.js";
 import Spinner from "./components/spinner/Spinner.jsx";
 import {getUserDataFromLocalStorage} from "./utility/storage.js";
+import Cart from "./components/cart/Cart.jsx";
 
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
     return (
         <main>
             <Header/>
+            <Cart/>
             <Outlet/>
         </main>
     )
