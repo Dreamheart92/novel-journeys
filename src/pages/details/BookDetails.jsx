@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {cartActions, updateCart} from "../../store/cart.slice.js";
 
 import style from "./BookDetails.module.css";
+import Spinner from "../../components/spinner/Spinner.jsx";
 
 export default function BookDetails() {
     const dispatch = useDispatch();
@@ -19,6 +20,14 @@ export default function BookDetails() {
     const handleAddItemToCart = (book) => {
         dispatch(updateCart({book, accessToken: user.accessToken, actionType: "add"}));
         dispatch(cartActions.openCart());
+    }
+
+    if (isLoading) {
+        return (
+            <div className={style.loading}>
+                <Spinner/>
+            </div>
+        )
     }
 
     return (
