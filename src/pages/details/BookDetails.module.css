@@ -11,6 +11,10 @@
     height: 100%;
 }
 
+.cover img {
+    border-radius: .25em;
+}
+
 .info {
     max-width: 40%;
     height: 100%;
