@@ -25,6 +25,7 @@ const cartSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(updateCart.fulfilled, (state, action) => {
+                state.error = false;
                 const {actionType, book} = action.payload;
 
                 switch (actionType) {
@@ -40,12 +41,13 @@ const cartSlice = createSlice({
                     }
 
                     case "remove" : {
-                        const bookItem = state.cart.find(item => item.book._id === book._id);
+                        const bookIndex = state.cart.findIndex(item => item.book._id === book._id);
+                        const item = state.cart[bookIndex];
 
-                        bookItem.quantity -= 1;
-
-                        if (bookItem.quantity <= 0) {
-                            state.cart.splice(bookItem, 1);
+                        if (item.quantity - 1 <= 0) {
+                            state.cart.splice(bookIndex, 1);
+                        } else {
+                            item.quantity--;
                         }
                         break;
                     }
@@ -56,7 +58,7 @@ const cartSlice = createSlice({
                 state.isLoading = false;
             })
             .addCase(updateCart.rejected, (state, action) => {
-                console.log("rejected");
+                state.error = true;
                 state.isLoading = false;
             })
     }
