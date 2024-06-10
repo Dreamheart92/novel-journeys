@@ -1,20 +1,35 @@
 import {useEffect, useState} from "react";
+import {handleRequest} from "../utility/handleRequest.js";
 
-const sendHttpRequest = async (url, settings, setData, setError, setIsLoading) => {
-    setIsLoading(true);
-
+export const sendHttpRequest = async (url, settings) => {
     try {
-
         const response = await fetch(url, settings);
+
+        if (response.status === 204) {
+            return {
+                success: true,
+                message: null,
+                data: null
+            }
+        }
+
         const result = await response.json();
 
         if (!result.success) {
-            setError({message: result.message, data: result.data});
+            return {
+                success: false,
+                message: result.message,
+                data: result.data
+            }
         } else {
-            setData(result.data);
+            return {
+                success: true,
+                message: result.message,
+                data: result.data
+            }
         }
-        setIsLoading(false);
     } catch (error) {
+        console.log(error);
         //TODO : redirect to 500 page something went wrong
     }
 }
@@ -27,13 +42,12 @@ export const useHttp = ({url, settings, defaultValue, initiate = true}) => {
     useEffect(() => {
         const method = settings?.method || "GET";
         if (initiate && method === "GET") {
-            setIsLoading(true);
-            sendHttpRequest(url, settings, setData, setError, setIsLoading);
+            handleRequest(url, settings, sendHttpRequest, setData, setIsLoading, setError);
         }
     }, [url]);
 
     const sendRequest = (url, settings) => {
-        sendHttpRequest(url, settings, setData, setError, setIsLoading);
+        handleRequest(url, settings, sendHttpRequest, setData, setIsLoading, setError);
     }
 
     return {
