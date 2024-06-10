@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000/api/v1';
+const baseUrl = 'https://rest-api-books.vercel.app/api/v1';
 const books = baseUrl + "/products";
 const auth = baseUrl + "/auth";
 const cart = baseUrl + "/cart";
