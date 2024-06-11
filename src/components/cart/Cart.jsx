@@ -68,12 +68,12 @@ export default function Cart() {
                             </button>
                         </div>
 
-                        {cart.length > 0 &&
+                        {cart.length > 0 && isCartOpen &&
                             <>
                                 <div className={style['cart-items']}>
                                     {cart.map(item => (
                                         <CartItem
-                                            key={item.book._id}
+                                            key={item.product._id}
                                             item={item}
                                             onIncreaseQuantity={handleIncreaseQuantity}
                                             onDecreaseQuantity={handleDecreaseQuantity}/>
@@ -102,7 +102,7 @@ export default function Cart() {
                             </>
                         }
 
-                        {cart.length <= 0 &&
+                        {cart.length <= 0 && isCartOpen &&
                             <div className={style['empty-cart']}>
                                 <FontAwesomeIcon style={{fontSize: "2em"}} icon={faFaceFrown}/>
 
