@@ -9,14 +9,15 @@ const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        removeItemFromCart(state, action) {
-
-        },
         openCart(state, action) {
             state.isCartOpen = true;
         },
         closeCart(state, action) {
             state.isCartOpen = false;
+        },
+        updateCart(state, action) {
+            state.cart = action.payload.cart;
+            state.total = calculateCartQuantityAndCost(state.cart);
         }
     },
     extraReducers: (builder) => {
@@ -30,18 +31,18 @@ const cartSlice = createSlice({
 
                 switch (actionType) {
                     case "add" : {
-                        const isBookAlreadyInCart = state.cart.find(item => item.book._id === book._id);
+                        const isBookAlreadyInCart = state.cart.find(item => item.product._id === book._id);
 
                         if (isBookAlreadyInCart) {
                             isBookAlreadyInCart.quantity++;
                         } else {
-                            state.cart.push({book, quantity: 1});
+                            state.cart.push({product: book, quantity: 1});
                         }
                         break;
                     }
 
                     case "remove" : {
-                        const bookIndex = state.cart.findIndex(item => item.book._id === book._id);
+                        const bookIndex = state.cart.findIndex(item => item.product._id === book._id);
                         const item = state.cart[bookIndex];
 
                         if (item.quantity - 1 <= 0) {
