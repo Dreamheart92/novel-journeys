@@ -5,7 +5,7 @@ export const calculateCartQuantityAndCost = (cart) => {
     }
     cart.forEach((item) => {
         total.quantity += item.quantity;
-        total.cost += item.book.price * item.quantity;
+        total.cost += item.product.price * item.quantity;
     })
     return total;
 }
