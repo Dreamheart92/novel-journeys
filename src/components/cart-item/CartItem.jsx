@@ -1,7 +1,7 @@
 import style from "./CartItem.module.css";
 
 export default function CartItem({item, onIncreaseQuantity, onDecreaseQuantity}) {
-    const {book, quantity} = item;
+    const {product: book, quantity} = item;
 
     return (
         <div className={style.wrapper}>
@@ -18,7 +18,8 @@ export default function CartItem({item, onIncreaseQuantity, onDecreaseQuantity})
                     <button onClick={() => onDecreaseQuantity(book)} className={style['quantity-controller']}>-
                     </button>
                     <p className={style.quantity}>{quantity}</p>
-                    <button onClick={() => onIncreaseQuantity(book)} className={style['quantity-controller']}>+</button>
+                    <button onClick={() => onIncreaseQuantity(book)} className={style['quantity-controller']}>+
+                    </button>
                 </div>
             </div>
         </div>
