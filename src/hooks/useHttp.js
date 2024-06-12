@@ -1,9 +1,36 @@
 import {useEffect, useState} from "react";
 import {handleRequest} from "../utility/handleRequest.js";
+import {getGuestDataFromLocalStorage, getUserDataFromLocalStorage} from "../utility/storage.js";
 
 export const sendHttpRequest = async (url, settings) => {
     try {
-        const response = await fetch(url, settings);
+        let body = settings?.hasOwnProperty("body") ? JSON.parse(settings.body) : {};
+        const options = settings || {};
+
+        if (!options.hasOwnProperty("method")) {
+            options["method"] = "Get";
+        }
+
+        const user = getUserDataFromLocalStorage();
+        const guest = getGuestDataFromLocalStorage();
+
+        if (user) {
+            if (options.hasOwnProperty("headers")) {
+                options.headers['Authorization'] = user.accessToken;
+            } else {
+                options["headers"] = {"Authorization": user.accessToken};
+            }
+        }
+
+        if (options.method.toLowerCase() !== "get") {
+            if (guest) {
+                body['guestId'] = guest._id;
+            }
+            options["body"] = JSON.stringify(body);
+        }
+
+
+        const response = await fetch(url, options);
 
         if (response.status === 204) {
             return {
