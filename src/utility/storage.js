@@ -13,3 +13,15 @@ export const removeUserDataFromLocalStorage = () => {
 export const getUserDataFromLocalStorage = () => {
     return JSON.parse(localStorage.getItem("user")) || null;
 }
+
+export const storeGuestToLocalStorage = (guestData) => {
+    localStorage.setItem("guest", JSON.stringify(guestData));
+}
+
+export const getGuestDataFromLocalStorage = () => {
+    return JSON.parse(localStorage.getItem("guest"));
+}
+
+export const clearGuestDataFromLocalStorage = () => {
+    localStorage.removeItem("guest");
+}
