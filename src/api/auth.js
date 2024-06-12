@@ -1,4 +1,6 @@
 import {API_ENDPOINTS} from "../constants/api.endpoints.js";
+import {sendHttpRequest} from "../hooks/useHttp.js";
+import {storeGuestToLocalStorage} from "../utility/storage.js";
 
 export const login = {
     url: API_ENDPOINTS.auth.login,
@@ -37,4 +39,16 @@ export const signup = {
             body: JSON.stringify(body)
         }
     }
+}
+
+export const registerGuestSettings = {
+    url: API_ENDPOINTS.auth.guest,
+    settings: {
+        method: "Post"
+    }
+}
+
+export const createGuest = async () => {
+    sendHttpRequest(registerGuestSettings.url, registerGuestSettings.settings)
+        .then((guestData) => storeGuestToLocalStorage(guestData.data));
 }
