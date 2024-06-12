@@ -6,9 +6,12 @@ import Button from "../../../components/shared/button/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import {passwordsMatching} from "../../../utility/utility.js";
 import {signup} from "../../../api/auth.js";
-import {storeUserDataToLocalStorage} from "../../../utility/storage.js";
+import {clearGuestDataFromLocalStorage, storeUserDataToLocalStorage} from "../../../utility/storage.js";
+import {getUserCart} from "../../../api/cart.js";
+import {useDispatch} from "react-redux";
 
 export default function Signup({formStyle}) {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const {data: userData, isLoading, error, sendRequest} = useHttp({initiate: false});
     const {formData: signUpData, register, handleSubmit, clearFieldValue} = useForm();
@@ -36,6 +39,8 @@ export default function Signup({formStyle}) {
     useEffect(() => {
         if (userData) {
             storeUserDataToLocalStorage(userData);
+            getUserCart(dispatch);
+            clearGuestDataFromLocalStorage();
             setTimeout(() => {
                 navigate("/");
             }, 2000)
