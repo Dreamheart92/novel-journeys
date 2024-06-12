@@ -8,9 +8,12 @@ import {login} from "../../../api/auth.js";
 
 import Input from "../../../components/shared/input/Input.jsx";
 import Button from "../../../components/shared/button/Button.jsx";
-import {storeUserDataToLocalStorage} from "../../../utility/storage.js";
+import {clearGuestDataFromLocalStorage, storeUserDataToLocalStorage} from "../../../utility/storage.js";
+import {useDispatch} from "react-redux";
+import {getUserCart} from "../../../api/cart.js";
 
 export default function Login({formStyle}) {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const {data: userData, error, isLoading, sendRequest} = useHttp({initiate: false});
     const {formData: loginData, register, handleSubmit, clearFieldValue} = useForm();
@@ -30,6 +33,8 @@ export default function Login({formStyle}) {
     useEffect(() => {
         if (userData) {
             storeUserDataToLocalStorage(userData);
+            getUserCart(dispatch);
+            clearGuestDataFromLocalStorage();
             setTimeout(() => {
                 navigate("/");
             }, 2000)
