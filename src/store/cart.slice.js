@@ -18,6 +18,9 @@ const cartSlice = createSlice({
         updateCart(state, action) {
             state.cart = action.payload.cart;
             state.total = calculateCartQuantityAndCost(state.cart);
+        },
+        clearCart(state, action) {
+            state.cart = [];
         }
     },
     extraReducers: (builder) => {
@@ -68,11 +71,11 @@ const cartSlice = createSlice({
 export const updateCart = createAsyncThunk(
     "cart/updateCart",
     async (data, {dispatch}) => {
-        const {actionType, book, accessToken} = data;
+        const {actionType, book} = data;
 
         const requestSettings = actionType === "add"
-            ? addItemToCartSettings(book._id, accessToken)
-            : removeItemFromCartSettings(book._id, accessToken);
+            ? addItemToCartSettings(book._id)
+            : removeItemFromCartSettings(book._id);
 
         try {
             const response = await sendHttpRequest(requestSettings.url, requestSettings.settings);
