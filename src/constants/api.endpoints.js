@@ -10,7 +10,8 @@ export const API_ENDPOINTS = {
     },
     auth: {
         login: auth + "/login",
-        signup: auth + "/signup"
+        signup: auth + "/signup",
+        guest: auth + "/guest"
     },
     cart: {
         cart,
