@@ -46,11 +46,11 @@ export default function Cart() {
     }
 
     const handleIncreaseQuantity = async (book) => {
-        dispatch(updateCart({book, accessToken: user.accessToken, actionType: "add"}));
+        dispatch(updateCart({book, actionType: "add"}));
     }
 
     const handleDecreaseQuantity = (book) => {
-        dispatch(updateCart({book, accessToken: user.accessToken, actionType: "remove"}));
+        dispatch(updateCart({book, actionType: "remove"}));
     }
 
     return (
