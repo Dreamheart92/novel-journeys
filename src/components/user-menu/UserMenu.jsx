@@ -2,10 +2,11 @@ import style from "./UserMenu.module.css";
 import Menu from "../menu/Menu.jsx";
 import MenuItem from "../menu-item/MenuItem.jsx";
 import {Link, useNavigate} from "react-router-dom";
-import {removeUserDataFromLocalStorage} from "../../utility/storage.js";
+import { removeUserDataFromLocalStorage} from "../../utility/storage.js";
 import {PATHS} from "../../constants/paths.js";
 import {useDispatch} from "react-redux";
 import {cartActions} from "../../store/cart.slice.js";
+import {createGuest} from "../../api/auth.js";
 
 export default function UserMenu({isLoggedIn}) {
     const navigate = useNavigate();
@@ -13,6 +14,8 @@ export default function UserMenu({isLoggedIn}) {
 
     const handleLogout = () => {
         removeUserDataFromLocalStorage();
+        dispatch(cartActions.clearCart());
+        createGuest();
         navigate("/");
     }
 
@@ -53,18 +56,18 @@ export default function UserMenu({isLoggedIn}) {
                     </MenuItem>
 
                     <MenuItem>
-                        <button className={style.button} onClick={handleOpenCart}>
-                            Cart
-                        </button>
-                    </MenuItem>
-
-                    <MenuItem>
                         <button className={style.button} onClick={handleLogout}>
                             Sign out
                         </button>
                     </MenuItem>
                 </>
             }
+
+            <MenuItem>
+                <button className={style.button} onClick={handleOpenCart}>
+                    Cart
+                </button>
+            </MenuItem>
         </Menu>
     )
 }
